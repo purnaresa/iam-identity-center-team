@@ -38,11 +38,11 @@ if [ -n "$amplifyCustomDomain" ]; then
   amplifyDomain=$([ -z "$amplifyCustomDomainPrefix" ] && echo $amplifyCustomDomain || echo $amplifyCustomDomainPrefix.$amplifyCustomDomain)
 fi
 
-aws cognito-idp create-identity-provider --region $REGION --user-pool-id $cognitoUserpoolId --provider-name=IDC --provider-type SAML --provider-details file://details.json --attribute-mapping email=Email --idp-identifiers team
+aws cognito-idp create-identity-provider --region $REGION --user-pool-id $cognitoUserpoolId --provider-name=IAMIdentityCenter --provider-type SAML --provider-details file://details.json --attribute-mapping email=email --idp-identifiers team
 aws cognito-idp update-user-pool-client --region $REGION --user-pool-id $cognitoUserpoolId \
 --client-id $clientID \
 --refresh-token-validity 1 \
---supported-identity-providers IDC \
+--supported-identity-providers IAMIdentityCenter \
 --allowed-o-auth-flows code \
 --allowed-o-auth-scopes "phone" "email" "openid" "profile" "aws.cognito.signin.user.admin" \
 --logout-urls "https://$amplifyDomain/"  \

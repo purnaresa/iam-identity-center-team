@@ -30,6 +30,12 @@ The **cognito.sh** bash script in the **deployment** folder performs the followi
 - Configures AWS IAM Identity Center as a SAML provider for the TEAM Cognito user pool
 - Updates the TEAM application client configuration to make use of the configured AWS IAM Identity Center SAML provider
 
+> The Cognito identity provider name must be `IAMIdentityCenter` — this matches the name used by the frontend when calling `Auth.federatedSignIn({ provider: "IAMIdentityCenter" })`.
+{: .important}
+
+> The SAML attribute mapping uses lowercase `email` on both sides (`"email":"email"`). Using a different casing (e.g., `Email`) may cause user identity resolution to fail.
+{: .important}
+
 > Ensure that the named profile for the **TEAM Deployment account** has sufficient permissions before executing the **cognito.sh** script
 {: .important}
 
