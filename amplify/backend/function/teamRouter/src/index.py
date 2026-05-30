@@ -428,17 +428,11 @@ def get_approvers(userId):
         IdentityStoreId=sso_instance['IdentityStoreId'],
         UserId=userId
     )
+    approver_id = "idc_" + response['UserName']
     for email in response['Emails']:
         if email:
             approver = email["Value"]
             break
-    cognito = boto3.client('cognito-idp', config=Config(user_agent_extra="team-idc"))
-    cognito_response = cognito.list_users(
-        UserPoolId=user_pool_id,
-        Filter=f"email = \"{approver}\"",
-        Limit=1,
-    )
-    approver_id = cognito_response['Users'][0]['Username']
     return {"approver_id": approver_id, "approver": approver}
 
 def list_group_membership(groupId):

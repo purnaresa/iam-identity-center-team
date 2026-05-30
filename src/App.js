@@ -24,7 +24,7 @@ function Home(props) {
           <Button
             className="homebutton"
             variant="primary"
-            onClick={() => Auth.federatedSignIn({ provider: "IAMIdentityCenter" })}
+            onClick={() => Auth.federatedSignIn()}
           >
             Federated Sign In
           </Button>
